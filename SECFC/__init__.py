@@ -105,7 +105,7 @@ def calculate_food_emissions(df, emission_factors_food=None):
 ########### Calculation of the carbon footprint of housing #############
 
 
-def calculate_housing_emissions(data, zip_data, emission_factors_housing=None, electricity_prices=None):
+def calculate_housing_emissions(data, zip_data=None, emission_factors_housing=None, electricity_prices=None):
     if emission_factors_housing is None:
         emission_factors_housing = {
             "WaterCFC": 26.5,  # kg CO2/year
@@ -117,6 +117,13 @@ def calculate_housing_emissions(data, zip_data, emission_factors_housing=None, e
             },
             "NaturalGas": 0.055  # kg CO2/thousand cubic feet
         }
+    if zip_data is None:
+        import requests
+        url = "https://raw.githubusercontent.com/yebarryallen/SECFC/main/zip_data.csv"
+        r = requests.get(url)
+        with open("zip_data.csv", "wb") as f:
+            f.write(r.content)
+        zip_data = pd.read_csv("zip_data.csv")
 
     if electricity_prices is None:
         electricity_prices = {
@@ -238,10 +245,13 @@ def calculate_all_emissions(df, plot=False):
         plt.show()
     return df
 
-# example usage
-'''data= pd.read_csv("standard data.csv")
-zip_data = pd.read_csv("zip_data.csv")
 
+# example usage
+
+
+'''
+
+zip_data =  download_zip_data()
 test_df = calculate_personal_emissions(data)
 test_df = calculate_food_emissions(test_df)
 test_df = calculate_housing_emissions(test_df, zip_data)
