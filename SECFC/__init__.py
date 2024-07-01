@@ -187,11 +187,7 @@ def calculate_housing_emissions(data, zip_data=None, emission_factors_housing=No
 
 
 
-# Example usage
-# df = pd.read_csv('data.csv')
-# zip_data = pd.read_csv('zip_data.csv')
-# df = calculate_emissions(df, zip_data)
-# print(df.head())
+
 
 
 ######### Calculation of the carbon footprint of living consumption ############
@@ -247,15 +243,3 @@ def calculate_all_emissions(df, plot=False):
         plt.show()
     return df
 
-
-# example usage
-
-
-'''
-
-test_df =  pd.read_csv('data.csv')
-test_df = calculate_personal_emissions(test_df)
-test_df = calculate_food_emissions(test_df)
-test_df = calculate_housing_emissions(test_df)
-test_df = calculate_consumption_emissions(test_df)
-test_df= calculate_all_emissions(test_df, plot=True)'''
