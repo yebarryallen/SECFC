@@ -121,9 +121,9 @@ def calculate_housing_emissions(data, zip_data=None, emission_factors_housing=No
         import requests
         url = "https://raw.githubusercontent.com/yebarryallen/SECFC/main/zip_data.csv"
         r = requests.get(url)
-        with open("zip_data.csv", "wb") as f:
-            f.write(r.content)
-        zip_data = pd.read_csv("zip_data.csv")
+        #直接下载读取csv文件，不要保存
+        zip_data = pd.read_csv(url)
+
 
     if electricity_prices is None:
         electricity_prices = {
@@ -186,11 +186,7 @@ def calculate_housing_emissions(data, zip_data=None, emission_factors_housing=No
 
 
 
-# Example usage
-# df = pd.read_csv('data.csv')
-# zip_data = pd.read_csv('zip_data.csv')
-# df = calculate_emissions(df, zip_data)
-# print(df.head())
+
 
 
 ######### Calculation of the carbon footprint of living consumption ############
@@ -241,19 +237,10 @@ def calculate_all_emissions(df, plot=False):
     ]].sum(axis=1)
     if plot:
         import matplotlib.pyplot as plt
-        df['TotalEmissions'].plot(kind='hist', bins=20, title='Total Emissions Distribution')
+        #绘图时候删去drop缺失值 和 inf 值
+        df['TotalEmissions'] = df['TotalEmissions'].replace([np.inf, -np.inf], np.nan).dropna()
+        plt.hist(df['TotalEmissions'], bins=20)
+        plt.xlabel('Total Emissions (kg CO2)')
         plt.show()
     return df
 
-
-# example usage
-
-
-'''
-
-test_df =  pd.read_csv('data.csv')
-test_df = calculate_personal_emissions(test_df)
-test_df = calculate_food_emissions(test_df)
-test_df = calculate_housing_emissions(test_df)
-test_df = calculate_consumption_emissions(test_df)
-test_df= calculate_all_emissions(test_df, plot=True)'''

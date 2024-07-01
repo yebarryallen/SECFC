@@ -125,7 +125,6 @@ def calculate_housing_emissions(data, zip_data=None, emission_factors_housing=No
         zip_data = pd.read_csv(url)
 
 
-
     if electricity_prices is None:
         electricity_prices = {
             "state": ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA",
@@ -239,7 +238,9 @@ def calculate_all_emissions(df, plot=False):
     if plot:
         import matplotlib.pyplot as plt
         #绘图时候删去drop缺失值 和 inf 值
-        df['TotalEmissions'].plot(kind='hist', bins=20, title='Total Emissions Distribution')
+        df['TotalEmissions'] = df['TotalEmissions'].replace([np.inf, -np.inf], np.nan).dropna()
+        plt.hist(df['TotalEmissions'], bins=20)
+        plt.title("Distribution of Total Emissions (kg CO2))")
         plt.show()
     return df
 
