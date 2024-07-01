@@ -4,13 +4,10 @@ The SECFC (Survey Embedded Carbon Footprint Calculator) is a Python package desi
 
 ## Installation
 
-To use SECFC, ensure you have the following dependencies installed:
-- pandas
-- numpy
-- matplotlib (optional, for plotting)
+You can install the package using pip. First, clone the repository and navigate to the project directory:
 
 ```python
-pip install pandas numpy matplotlib
+pip install SECFC
 ```
 
 ## Using SECFC
