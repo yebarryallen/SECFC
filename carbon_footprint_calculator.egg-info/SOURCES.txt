@@ -1,0 +1,9 @@
+LICENSE
+README.md
+setup.py
+SECFC/__init__.py
+carbon_footprint_calculator.egg-info/PKG-INFO
+carbon_footprint_calculator.egg-info/SOURCES.txt
+carbon_footprint_calculator.egg-info/dependency_links.txt
+carbon_footprint_calculator.egg-info/requires.txt
+carbon_footprint_calculator.egg-info/top_level.txt

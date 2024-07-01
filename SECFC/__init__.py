@@ -251,9 +251,9 @@ def calculate_all_emissions(df, plot=False):
 
 '''
 
-zip_data =  download_zip_data()
-test_df = calculate_personal_emissions(data)
+test_df =  pd.read_csv('data.csv')
+test_df = calculate_personal_emissions(test_df)
 test_df = calculate_food_emissions(test_df)
-test_df = calculate_housing_emissions(test_df, zip_data)
+test_df = calculate_housing_emissions(test_df)
 test_df = calculate_consumption_emissions(test_df)
 test_df= calculate_all_emissions(test_df, plot=True)'''
