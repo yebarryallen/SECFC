@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: SECFC
+Version: 0.1.0
+Summary: A Python package to calculate carbon footprint from various activities.
+Home-page: https://github.com/yebarryallen/SECFC
+Author: Jinquan Ye
+Author-email: jinquan.ye@duke.edu
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Python: >=3.6
+License-File: LICENSE
+Requires-Dist: pandas>=1.0.0
+Requires-Dist: numpy>=1.18.0
+Requires-Dist: matplotlib>=3.0.0

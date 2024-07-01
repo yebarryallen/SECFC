@@ -121,9 +121,10 @@ def calculate_housing_emissions(data, zip_data=None, emission_factors_housing=No
         import requests
         url = "https://raw.githubusercontent.com/yebarryallen/SECFC/main/zip_data.csv"
         r = requests.get(url)
-        with open("zip_data.csv", "wb") as f:
-            f.write(r.content)
-        zip_data = pd.read_csv("zip_data.csv")
+        #直接下载读取csv文件，不要保存
+        zip_data = pd.read_csv(url)
+
+
 
     if electricity_prices is None:
         electricity_prices = {
@@ -241,6 +242,7 @@ def calculate_all_emissions(df, plot=False):
     ]].sum(axis=1)
     if plot:
         import matplotlib.pyplot as plt
+        #绘图时候删去drop缺失值 和 inf 值
         df['TotalEmissions'].plot(kind='hist', bins=20, title='Total Emissions Distribution')
         plt.show()
     return df

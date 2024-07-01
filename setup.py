@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='carbon_footprint_calculator',
+    name='SECFC',
     version='0.1.0',
     description='A Python package to calculate carbon footprint from various activities.',
     author='Jinquan Ye',
