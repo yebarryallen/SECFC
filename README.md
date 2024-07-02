@@ -11,7 +11,7 @@ The SECFC (Survey Embedded Carbon Footprint Calculator) is a Python package desi
 
 ## Installation
 
-You can install the package using pip. First, clone the repository and navigate to the project directory:
+You can install the package using pip. 
 
 ```python
 pip install SECFC
