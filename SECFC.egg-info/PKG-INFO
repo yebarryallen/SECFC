@@ -1,10 +1,11 @@
 Metadata-Version: 2.1
 Name: SECFC
-Version: 0.1.0
+Version: 0.1.1
 Summary: A Python package to calculate carbon footprint from various activities.
 Home-page: https://github.com/yebarryallen/SECFC
 Author: Jinquan Ye
 Author-email: jinquan.ye@duke.edu
+Keywords: survey,carbon footprint,emissions
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: MIT License
@@ -17,3 +18,5 @@ License-File: LICENSE
 Requires-Dist: pandas>=1.0.0
 Requires-Dist: numpy>=1.18.0
 Requires-Dist: matplotlib>=3.0.0
+
+The SECFC (Survey Embedded Carbon Footprint Calculator) is a Python package designed to calculate the carbon footprint of individuals based on their survey responses. This tutorial will guide you through using the package to calculate carbon footprints from survey data.

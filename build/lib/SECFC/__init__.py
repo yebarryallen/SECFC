@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 ################# Transport Carbon Footprint Calculation ################
 
-def calculate_personal_emissions(df, emission_factors=None):
+def trans_calc(df, emission_factors=None):
+    import numpy as np
     if emission_factors is None:
         emission_factors = {
             "Gasoline Vehicles": 0.14748,  # kg CO2 per km
@@ -42,7 +43,7 @@ def calculate_personal_emissions(df, emission_factors=None):
     car_type_code = df['C2_Car_type']
     travel_distance_code = df['C3_Travel_Distance']
     public_transport_frequency = df['C4_Public_Transport']
-    public_transport_distance_code = df['Q74']
+    public_transport_distance_code = df['C5_Public_Transport_distance']
     flight_frequency = df['C5_Air_Travel']
     long_distance_train_frequency = df['C4_Public_Transport2']
 
@@ -65,13 +66,10 @@ def calculate_personal_emissions(df, emission_factors=None):
 
     # Add the total transport emissions to the dataframe
     df['total_transport_emissions'] = total_transport_emissions
-
-    # Print the first few rows of the dataframe with the calculated emissions
-    print(df.head())
     return df
 
 ########### Calculation of the carbon footprint of food consumption #############
-def calculate_food_emissions(df, emission_factors_food=None):
+def diets_calc(df, emission_factors_food=None):
     # 碳排放系数
     if emission_factors_food is None:
         emission_factors_food = {
@@ -105,7 +103,7 @@ def calculate_food_emissions(df, emission_factors_food=None):
 ########### Calculation of the carbon footprint of housing #############
 
 
-def calculate_housing_emissions(data, zip_data=None, emission_factors_housing=None, electricity_prices=None):
+def housing_calc(data, zip_data=None, emission_factors_housing=None, electricity_prices=None):
     if emission_factors_housing is None:
         emission_factors_housing = {
             "WaterCFC": 26.5,  # kg CO2/year
@@ -193,7 +191,7 @@ def calculate_housing_emissions(data, zip_data=None, emission_factors_housing=No
 
 
 # 计算函数
-def calculate_consumption_emissions(df, emission_factors=None):
+def consump_calc(df, emission_factors=None):
     if emission_factors is None:
         emission_factors = {
             "FoodDelivery": 0.349757961,  # kg CO2/USD
@@ -203,15 +201,19 @@ def calculate_consumption_emissions(df, emission_factors=None):
             "AlcoholDrinks": 0.042726645,  # kg CO2/USD
             "Entertainment": 0.009474576,  # kg CO2/USD
             "Healthcare": 0.014611029,  # kg CO2/USD
-            "Clothing": 0.018380588  # kg CO2/USD
+            "Clothing": 0.018380588,  # kg CO2/USD,
+            "Pets_dog": 770,  # kg 
+            "Pets_cat": 335  # kg
         }
-    df["FoodDeliveryEmission"] = df["Q84_1"] * emission_factors["FoodDelivery"]
-    df["DiningOutEmission"] = df["Q84_2"] * emission_factors["DiningOut"]
-    df["HotelStaysEmission"] = df["Q84_4"] * emission_factors["HotelStays"]
-    df["TobaccoProductsEmission"] = df["Q84_5"] * emission_factors["TobaccoProducts"]
-    df["AlcoholDrinksEmission"] = df["Q84_6"] * emission_factors["AlcoholDrinks"]
-    df["EntertainmentEmission"] = df["Q84_7"] * emission_factors["Entertainment"]
-    df["HealthcareEmission"] = df["Q84_8"] * emission_factors["Healthcare"]
+    df["FoodDeliveryEmission"] = df["GOODS_1"] * emission_factors["FoodDelivery"]
+    df["DiningOutEmission"] = df["GOODS_2"] * emission_factors["DiningOut"]
+    df["HotelStaysEmission"] = df["GOODS_4"] * emission_factors["HotelStays"]
+    df["TobaccoProductsEmission"] = df["GOODS_5"] * emission_factors["TobaccoProducts"]
+    df["AlcoholDrinksEmission"] = df["GOODS_6"] * emission_factors["AlcoholDrinks"]
+    df["EntertainmentEmission"] = df["GOODS_7"] * emission_factors["Entertainment"]
+    df["HealthcareEmission"] = df["GOODS_8"] * emission_factors["Healthcare"]
+    df["PetsEmission_dog"] = df["PETS_1"] * emission_factors["Pets_dog"]
+    df["PetsEmission_cat"] = df["PETS_2"] * emission_factors["Pets_cat"]
 
     # 计算每年服装购买的排放量
     annual_clothing_spending = df["CL1_Q31"].apply(lambda x: [600, 420, 300, 120, 60][x - 1])  # 假设每年服装花费
@@ -221,7 +223,7 @@ def calculate_consumption_emissions(df, emission_factors=None):
     df["ConsumptionEmissions"] = df[[
         "FoodDeliveryEmission", "DiningOutEmission", "HotelStaysEmission",
         "TobaccoProductsEmission", "AlcoholDrinksEmission", "EntertainmentEmission",
-        "HealthcareEmission", "ClothingEmission"
+        "HealthcareEmission", "ClothingEmission", "PetsEmission_dog", "PetsEmission_cat"
     ]].sum(axis=1)
 
     return df
@@ -229,7 +231,7 @@ def calculate_consumption_emissions(df, emission_factors=None):
 
 #####################计算总的碳排放量####################
 
-def calculate_all_emissions(df, plot=False):
+def total_emis_calc(df, plot=False):
     # Calculate total emissions
     df["TotalEmissions"] = df[[
         "total_transport_emissions", "total_food_emissions",
@@ -240,7 +242,7 @@ def calculate_all_emissions(df, plot=False):
         #绘图时候删去drop缺失值 和 inf 值
         df['TotalEmissions'] = df['TotalEmissions'].replace([np.inf, -np.inf], np.nan).dropna()
         plt.hist(df['TotalEmissions'], bins=20)
-        plt.xlabel('Total Emissions (kg CO2)')
+        plt.title("Distribution of Total Emissions (kg CO2))")
         plt.show()
     return df
 
