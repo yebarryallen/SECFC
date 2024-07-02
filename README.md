@@ -17,13 +17,7 @@ Begin by importing the necessary functions from SECFC.
 ```python
 import pandas as pd
 import numpy as np
-from secfc import (
-    calculate_personal_emissions,
-    calculate_food_emissions,
-    calculate_housing_emissions,
-    calculate_consumption_emissions,
-    calculate_all_emissions
-)
+import SECFC
 ```
 
 ### Step 2: Prepare Your Survey Data
