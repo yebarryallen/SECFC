@@ -1,5 +1,9 @@
 # SECFC: Survey Embedded Carbon Footprint Calculator
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![PyPI version](https://badge.fury.io/py/SECFC.svg)](https://badge.fury.io/py/SECFC)
+[![Twitter Follow](https://img.shields.io/twitter/follow/yebarryallen.svg?style=social)](https://x.com/yebarryallen)
+
 The SECFC (Survey Embedded Carbon Footprint Calculator) is a Python package designed to calculate the carbon footprint of individuals based on their survey responses. This tutorial will guide you through using the package to calculate carbon footprints from survey data.
 
 ## Installation
