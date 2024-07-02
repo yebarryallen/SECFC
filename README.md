@@ -25,13 +25,48 @@ Begin by importing the necessary functions from SECFC.
 import pandas as pd
 import numpy as np
 import SECFC
+from SECFC import diets_calc
+from SECFC import trans_calc
+from SECFC import consump_calc
+from SECFC import housing_calc
+from SECFC import total_emis_calc
 ```
 
 ### Step 2: Prepare Your Survey Data
 Ensure your survey data is in a pandas DataFrame format (if you are using the Qualtrics template we provided, please ensure that the variable name are consistent). The columns should match the expected survey questions, as shown in the template below:
 
 ```python
-C1_Car_Usage, C2_Car_type, C3_Travel_Distance, C4_Public_Transport, Q74, C5_Air_Travel, C4_Public_Transport2, F3_Q28_1, F3_Q28_2, F3_Q28_3, F3_Q28_4, E2_Electricity_bill_1, E3_natural_gas_bill_1, US_Zip_Code, Q84_1, Q84_2, Q84_4, Q84_5, Q84_6, Q84_7, Q84_8, CL1_Q31, Family_size_6, Family_size_14, Family_size_15
+# example usage
+data = {
+    'C1_Car_Usage': [5, 3, 0, 7, 2],  # Number of days using a car per week
+    'C2_Car_type': [1, 2, 2, 3, 4],  # Car type code
+    'C3_Travel_Distance': [2, 1, 4, 3, 2],  # Travel distance code
+    'C4_Public_Transport': [3, 2, 1, 4, 0],  # Public transport frequency code
+    'C5_Public_Transport_distance': [1, 2, 3, 4, 1],  # Public transport distance code
+    'C5_Air_Travel': [2, 1, 1, 3, 0],  # Air travel frequency
+    'C4_Public_Transport2': [3, 2, 1, 0, 4],  # Long-distance train frequency code
+    'F3_Q28_1': [7, 5, 6, 2, 3],  # Number of meat meals per week
+    'F3_Q28_2': [3, 4, 2, 1, 5],  # Number of vegetarian meals per week
+    'F3_Q28_3': [1, 2, 3, 4, 2],  # Number of plant-based meals per week
+    'F3_Q28_4': [4, 2, 5, 3, 1],  # Number of dairy meals per week
+    'US_Zip_Code': [90210, 10001, 73301, 60616, 33101],  # Zip code
+    'E2_Electricity_bill_1': [100, 150, 200, 250, 300],  # Monthly electricity bill
+    'E3_natural_gas_bill_1': [50, 75, 100, 125, 150],  # Monthly natural gas bill
+    'Family_size_6': [1, 2, 3, 4, 5],  # Number of family members 1
+    'Family_size_14': [0, 1, 0, 1, 0],  # Number of family members 2
+    'Family_size_15': [0, 0, 1, 0, 1],  # Number of family members 3
+    'GOODS_1': [200, 300, 400, 500, 600],  # Takeout expenses
+    'GOODS_2': [100, 200, 300, 400, 500],  # Dining out expenses
+    'GOODS_4': [150, 250, 350, 450, 550],  # Hotel accommodation expenses
+    'GOODS_5': [50, 100, 150, 200, 250],  # Tobacco products expenses
+    'GOODS_6': [75, 125, 175, 225, 275],  # Alcoholic beverages expenses
+    'GOODS_7': [60, 110, 160, 210, 260],  # Entertainment expenses
+    'GOODS_8': [80, 130, 180, 230, 280],  # Healthcare expenses
+    'PETS_1': [1, 0, 1, 0, 1],  # Number of dogs
+    'PETS_2': [0, 1, 0, 1, 0],  # Number of cats
+    'CL1_Q31': [1, 2, 3, 4, 5]  # Annual clothing expense level
+}
+
 ```
 
 ### Step 3: Calculate Emissions
@@ -41,7 +76,8 @@ Calculate the carbon footprint from transportation.
 ```python
 
 import SECFC
-df = pd.read_csv('data.csv')
+data = pd.DataFrame(data)
+# data = pd.read_csv('standard data.csv')
 df = SECFC.calculate_personal_emissions(df)
 ```
 
