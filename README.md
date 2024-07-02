@@ -39,8 +39,9 @@ Calculate the carbon footprint from transportation.
 
 ```python
 
+import SECFC
 df = pd.read_csv('data.csv')
-df = calculate_personal_emissions(df)
+df = SECFC.calculate_personal_emissions(df)
 ```
 
 #### Food Emissions
@@ -48,7 +49,7 @@ Calculate the carbon footprint from food consumption.
 
 ```python
 
-df = calculate_food_emissions(df)
+df = SECFC.calculate_food_emissions(df)
 ```
 
 #### Housing Emissions
@@ -56,7 +57,7 @@ Calculate the carbon footprint from housing.
 
 ```python
 
-df = calculate_housing_emissions(df)
+df = SECFC.calculate_housing_emissions(df)
 
 ```
 
@@ -64,7 +65,7 @@ df = calculate_housing_emissions(df)
 Calculate the carbon footprint from living consumption.
 
 ```python
-df = calculate_consumption_emissions(df)
+df = SECFC.calculate_consumption_emissions(df)
 
 ```
 
@@ -73,7 +74,7 @@ df = calculate_consumption_emissions(df)
 Combine all calculated emissions to get the total carbon footprint. Optionally, you can plot the distribution of total emissions.
 
 ```python
-df = calculate_all_emissions(df, plot=True)
+df = SECFC.calculate_all_emissions(df, plot=True)
 ```
 
 ### Example Usage
@@ -86,13 +87,13 @@ import pandas as pd
 df = pd.read_csv('data.csv')
 
 # Calculate emissions from various categories
-df = calculate_personal_emissions(df)
-df = calculate_food_emissions(df)
-df = calculate_housing_emissions(df)
-df = calculate_consumption_emissions(df)
+df = SECFC.calculate_personal_emissions(df)
+df = SECFC.calculate_food_emissions(df)
+df = SECFC.calculate_housing_emissions(df)
+df = SECFC.calculate_consumption_emissions(df)
 
 # Calculate total emissions and plot the distribution
-df = calculate_all_emissions(df, plot=True)
+df = SECFC.calculate_all_emissions(df, plot=True)
 
 # Display the first few rows of the dataframe
 print(df.head())
