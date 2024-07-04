@@ -1,7 +1,6 @@
 # SECFC: Survey Embedded Carbon Footprint Calculator
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-[![PyPI version](https://badge.fury.io/py/SECFC.svg)](https://badge.fury.io/py/SECFC)
 [![Website](https://img.shields.io/badge/Website-Jinquan_Ye-red)](https://jinquanyescholar.netlify.app)
 [![Website](https://img.shields.io/badge/Website-Ziqian_Xia-blue)](https://ziqian-xia.tech/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/yebarryallen.svg?style=social)](https://x.com/yebarryallen)
